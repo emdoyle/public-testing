@@ -1,3 +1,5 @@
+pgdata
+.bridge/
 .idea
 db.*
 __pycache__

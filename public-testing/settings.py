@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'testing.urls'
+ROOT_URLCONF = 'public-testing.urls'
 
 TEMPLATES = [
     {
@@ -67,8 +67,10 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'testing.wsgi.application'
+WSGI_APPLICATION = 'public-testing.wsgi.application'
 
+
+STATIC_URL = "/static/"
 
 
 # Password validation

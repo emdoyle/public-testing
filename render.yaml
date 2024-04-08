@@ -2,17 +2,17 @@ services:
   - type: web
     plan: starter
     runtime: python
-    name: testing
+    name: public-testing
     buildCommand: ./render-build.sh
     startCommand: ./render-start.sh
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: testing-db
+          name: public-testing-db
           property: connectionString
       - key: REDIS_URL
         fromService:
-          name: testing-redis
+          name: public-testing-redis
           type: redis
           property: connectionString
       - key: SECRET_KEY
@@ -22,12 +22,12 @@ services:
       - key: BRIDGE_PLATFORM
         value: render
   - type: redis
-    name: testing-redis
+    name: public-testing-redis
     plan: free
     ipAllowList: []
 
 databases:
-  - name: testing-db
+  - name: public-testing-db
     plan: free
-    databaseName: testing-db
+    databaseName: public-testing-db
     user: testing

@@ -1,7 +1,0 @@
-pgdata
-.bridge/
-.idea
-db.*
-__pycache__
-.DS_Store
-.python-version
