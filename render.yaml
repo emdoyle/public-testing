@@ -29,5 +29,5 @@ services:
 databases:
   - name: public-testing-db
     plan: free
-    databaseName: public-testing-db
-    user: testing
+    databaseName: public_testing_db
+    user: public_testing
