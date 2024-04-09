@@ -6,6 +6,12 @@ services:
     buildCommand: ./render-build.sh
     startCommand: ./render-start.sh
     envVars:
+      - key: BRIDGE_PLATFORM
+        value: render
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
       - key: DEBUG
         value: "False"
       - key: DATABASE_URL
@@ -17,16 +23,33 @@ services:
           name: public-testing-redis
           type: redis
           property: connectionString
-      - key: SECRET_KEY
-        generateValue: true
-      - key: WEB_CONCURRENCY
-        value: 4
-      - key: BRIDGE_PLATFORM
-        value: render
   - type: redis
     name: public-testing-redis
     plan: free
     ipAllowList: []
+  - type: worker
+    name: public-testing-worker
+    runtime: python
+    buildCommand: ./render-build.sh
+    startCommand: ./render-start-worker.sh
+    envVars:
+      - key: BRIDGE_PLATFORM
+        value: render
+      - key: SECRET_KEY
+        generateValue: true
+      - key: TASK_CONCURRENCY
+        value: 4
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: public-testing-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: public-testing-redis
+          type: redis
+          property: connectionString
 
 databases:
   - name: public-testing-db
